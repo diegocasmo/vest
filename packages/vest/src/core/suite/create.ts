@@ -9,13 +9,7 @@ import createStateRef, { TStateRef } from 'createStateRef';
 import context from 'ctx';
 import { IVestResult, produceFullResult } from 'produce';
 import { produceDraft, TDraftResult } from 'produceDraft';
-import {
-  usePending,
-  useTestObjects,
-  useCarryOverTests,
-  useLagging,
-  useTestsOrdered,
-} from 'stateHooks';
+import { usePending, useLagging, useTestsOrdered } from 'stateHooks';
 
 export default function create<T extends (...args: any[]) => void>(
   suiteCallback: T
@@ -58,13 +52,10 @@ export default function create<T extends (...args: any[]) => void>(
     context.bind({ stateRef }, (...args: unknown[]) => {
       const [prevTestsOrdered, testsOrdered] = useTestsOrdered();
 
-      const [previousTestObjects] = useTestObjects();
-      const [, setCarryOverTests] = useCarryOverTests();
       const [pending] = usePending();
       const [prevLagging, setLagging] = useLagging();
       state.reset();
       testsOrdered(() => prevTestsOrdered);
-      setCarryOverTests(() => previousTestObjects);
 
       // Move all the active pending tests to the lagging array
       setLagging(pending.concat(prevLagging));
@@ -79,7 +70,7 @@ export default function create<T extends (...args: any[]) => void>(
     {
       get: context.bind({ stateRef }, produceDraft),
       remove: context.bind({ stateRef }, name => {
-        const [testObjects] = useTestObjects();
+        const [testObjects] = useTestsOrdered();
 
         // We're mutating the array in `cancel`, so we have to first copy it.
         asArray(testObjects).forEach(testObject => {

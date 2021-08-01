@@ -12,7 +12,8 @@ Object {
     "doneCallbacks": Array [],
     "fieldCallbacks": Object {},
   },
-  "testObjects": Array [],
+  "testsOrdered": Array [],
+  "testsOrderedCursor": 0,
 }
 `;
 
@@ -28,7 +29,8 @@ Object {
     "doneCallbacks": Array [],
     "fieldCallbacks": Object {},
   },
-  "testObjects": Array [],
+  "testsOrdered": Array [],
+  "testsOrderedCursor": 0,
 }
 `;
 
@@ -43,9 +45,10 @@ Object {
       "failed": false,
       "fieldName": "test_0",
       "groupName": "group_name",
-      "id": "4",
+      "id": "1",
       "isWarning": false,
       "message": "Some statement string",
+      "skipped": false,
       "testFn": [MockFunction],
     },
   ],
@@ -55,7 +58,8 @@ Object {
     "doneCallbacks": Array [],
     "fieldCallbacks": Object {},
   },
-  "testObjects": Array [],
+  "testsOrdered": Array [],
+  "testsOrderedCursor": 0,
 }
 `;
 
@@ -67,18 +71,20 @@ Object {
       "canceled": false,
       "failed": false,
       "fieldName": "test_2",
-      "id": "12",
+      "id": "3",
       "isWarning": false,
       "message": "Some statement string",
+      "skipped": false,
       "testFn": [MockFunction],
     },
     VestTest {
       "canceled": false,
       "failed": false,
       "fieldName": "test_1",
-      "id": "11",
+      "id": "2",
       "isWarning": false,
       "message": "Some statement string",
+      "skipped": false,
       "testFn": [MockFunction],
     },
   ],
@@ -89,9 +95,10 @@ Object {
       "failed": false,
       "fieldName": "test_0",
       "groupName": "group_name",
-      "id": "15",
+      "id": "6",
       "isWarning": false,
       "message": "failure message",
+      "skipped": false,
       "testFn": [MockFunction],
     },
   ],
@@ -101,6 +108,7 @@ Object {
     "doneCallbacks": Array [],
     "fieldCallbacks": Object {},
   },
-  "testObjects": Array [],
+  "testsOrdered": Array [],
+  "testsOrderedCursor": 0,
 }
 `;

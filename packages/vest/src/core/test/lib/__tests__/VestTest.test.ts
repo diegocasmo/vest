@@ -4,7 +4,7 @@ import VestTest from 'VestTest';
 import addTestToState from 'addTestToState';
 import context from 'ctx';
 import { setPending } from 'pending';
-import { usePending, useTestObjects, useLagging } from 'stateHooks';
+import { usePending, useLagging, useTestsOrdered } from 'stateHooks';
 
 const fieldName = 'unicycle';
 const message = 'I am Root.';
@@ -89,7 +89,7 @@ describe('VestTest', () => {
     it.withContext(
       'Should remove a testObject from the state',
       () => {
-        const [testObjects] = useTestObjects();
+        const [testObjects] = useTestsOrdered();
         expect(testObjects).toEqual(expect.arrayContaining([testObject]));
         testObject.cancel();
         expect(testObjects).toEqual(expect.not.arrayContaining([testObject]));

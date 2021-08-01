@@ -4,7 +4,6 @@ import isFunction from 'isFunction';
 import VestTest, { TTestFn } from 'VestTest';
 import ctx from 'ctx';
 import { isExcluded } from 'exclusive';
-import mergeCarryOverTests from 'mergeCarryOverTests';
 import registerTest from 'registerTest';
 import {
   useSkippedTests,
@@ -36,7 +35,6 @@ export function testBase(
   // console.log(testObject, prevRunTest, cursorAt);
   if (isExcluded(testObject)) {
     setSkippedTests(skippedTests => skippedTests.concat(testObject));
-    mergeCarryOverTests(testObject);
     testObject.skip();
     useSetNextCursorAt();
     return prevRunTest;

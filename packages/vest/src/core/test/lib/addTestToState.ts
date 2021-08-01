@@ -1,10 +1,10 @@
 import VestTest from 'VestTest';
-import { useTestObjects } from 'stateHooks';
+import { useTestsOrdered } from 'stateHooks';
 
 /**
  * Stores test object inside suite state.
  */
 export default (testObject: VestTest): void => {
-  const [, setTestObjects] = useTestObjects();
+  const [, setTestObjects] = useTestsOrdered();
   setTestObjects(testObjects => testObjects.concat(testObject));
 };

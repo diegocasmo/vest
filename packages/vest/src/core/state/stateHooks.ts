@@ -23,9 +23,6 @@ export function useTestCallbacks(): TStateHandlerReturn<{
 }> {
   return useStateRef().testCallbacks();
 }
-export function useTestObjects(): TStateHandlerReturn<VestTest[]> {
-  return useStateRef().testObjects();
-}
 export function useSkippedTests(): TStateHandlerReturn<VestTest[]> {
   return useStateRef().skippedTests();
 }
@@ -81,4 +78,10 @@ export function useSetNextCursorAt(): void {
   const [, setCursorAt] = useCursorAt();
 
   setCursorAt((cursorAt: number) => cursorAt + 1);
+}
+
+export function useRefreshTestObjects(): void {
+  const [, setTestsOrder] = useTestsOrdered();
+
+  setTestsOrder(testsOrdered => testsOrdered.slice(0));
 }
