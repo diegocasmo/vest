@@ -38,3 +38,39 @@ export function useStateRef(): Exclude<TStateRef, void> {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return ctx.useX().stateRef!; // I should revisit this
 }
+
+export function useTestsOrdered(): TStateHandlerReturn<VestTest[]> {
+  return useStateRef().testsOrdered();
+}
+
+export function useCursorAt(): TStateHandlerReturn<number> {
+  return useStateRef().cursorAt();
+}
+
+export function useTestAtCursor(): VestTest {
+  const [cursorAt] = useCursorAt();
+  const [testsOrder] = useTestsOrdered();
+
+  return testsOrder[cursorAt];
+}
+
+export function useSetTestAtCursor(testObject: VestTest): void {
+  const [cursorAt] = useCursorAt();
+  const [testsOrder, setTestsOrder] = useTestsOrdered();
+
+  if (testObject === testsOrder[cursorAt]) {
+    return;
+  }
+
+  setTestsOrder((testsOrder: VestTest[]) => {
+    const newTestsOrder = testsOrder.slice(0);
+    newTestsOrder[cursorAt] = testObject;
+    return newTestsOrder;
+  });
+}
+
+function useSetNextCursorAt(): void {
+  const [, setCursorAt] = useCursorAt();
+
+  setCursorAt((cursorAt: number) => cursorAt + 1);
+}

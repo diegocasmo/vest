@@ -59,6 +59,10 @@ export default class VestTest {
     this.isWarning = true;
   }
 
+  skip(): void {
+    this.skipped = true;
+  }
+
   cancel(): void {
     this.canceled = true;
     removePending(this);

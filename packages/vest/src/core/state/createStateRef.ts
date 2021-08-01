@@ -22,6 +22,8 @@ export default function createStateRef(
       doneCallbacks: [],
     })),
     testObjects: state.registerStateKey<VestTest[]>(() => []),
+    testsOrdered: state.registerStateKey<VestTest[]>(() => []),
+    testsOrderedCursor: state.registerStateKey<number>(() => 0),
   };
 }
 
