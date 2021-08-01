@@ -111,7 +111,6 @@
       "utilityTypes": ["./packages/shared/src/utilityTypes.ts"],
       "vast": ["./packages/vast/src/vast.ts"],
       "ctx": ["./packages/vest/src/core/ctx.ts"],
-      "runnableHooks": ["./packages/vest/src/core/runnable/runnableHooks.ts"],
       "createStateRef": ["./packages/vest/src/core/state/createStateRef.ts"],
       "stateHooks": ["./packages/vest/src/core/state/stateHooks.ts"],
       "create": ["./packages/vest/src/core/suite/create.ts"],
