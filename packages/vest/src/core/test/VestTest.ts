@@ -15,6 +15,7 @@ export default class VestTest {
   failed = false;
   isWarning = false;
   canceled = false;
+  skipped = false;
 
   constructor(
     fieldName: string,

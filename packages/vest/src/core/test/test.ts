@@ -6,7 +6,12 @@ import ctx from 'ctx';
 import { isExcluded } from 'exclusive';
 import mergeCarryOverTests from 'mergeCarryOverTests';
 import registerTest from 'registerTest';
-import { useSkippedTests } from 'stateHooks';
+import {
+  useSkippedTests,
+  useTestAtCursor,
+  useSetTestAtCursor,
+  useSetNextCursorAt,
+} from 'stateHooks';
 import bindTestEach from 'test.each';
 import bindTestMemo from 'test.memo';
 
@@ -27,11 +32,18 @@ export function testBase(
     groupName: context?.groupName,
   });
 
+  const prevRunTest = useTestAtCursor(testObject);
+  // console.log(testObject, prevRunTest, cursorAt);
   if (isExcluded(testObject)) {
     setSkippedTests(skippedTests => skippedTests.concat(testObject));
     mergeCarryOverTests(testObject);
-    return testObject;
+    testObject.skip();
+    useSetNextCursorAt();
+    return prevRunTest;
   }
+
+  useSetTestAtCursor(testObject);
+  useSetNextCursorAt(); // maybe somehow do this only in one place?
 
   if (!isFunction(testFn)) {
     return testObject;

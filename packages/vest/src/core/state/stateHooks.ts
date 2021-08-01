@@ -44,14 +44,22 @@ export function useTestsOrdered(): TStateHandlerReturn<VestTest[]> {
 }
 
 export function useCursorAt(): TStateHandlerReturn<number> {
-  return useStateRef().cursorAt();
+  return useStateRef().testsOrderedCursor();
 }
 
-export function useTestAtCursor(): VestTest {
+export function useTestAtCursor(initialValue: VestTest): VestTest {
   const [cursorAt] = useCursorAt();
-  const [testsOrder] = useTestsOrdered();
+  const [testsOrder, setTestsOrder] = useTestsOrdered();
 
-  return testsOrder[cursorAt];
+  if (!testsOrder[cursorAt]) {
+    setTestsOrder((testsOrder: VestTest[]) => {
+      const newTestsOrder = testsOrder.slice(0);
+      newTestsOrder[cursorAt] = initialValue;
+      return newTestsOrder;
+    });
+  }
+
+  return testsOrder[cursorAt] ?? initialValue;
 }
 
 export function useSetTestAtCursor(testObject: VestTest): void {
@@ -69,7 +77,7 @@ export function useSetTestAtCursor(testObject: VestTest): void {
   });
 }
 
-function useSetNextCursorAt(): void {
+export function useSetNextCursorAt(): void {
   const [, setCursorAt] = useCursorAt();
 
   setCursorAt((cursorAt: number) => cursorAt + 1);

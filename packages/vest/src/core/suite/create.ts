@@ -14,6 +14,7 @@ import {
   useTestObjects,
   useCarryOverTests,
   useLagging,
+  useTestsOrdered,
 } from 'stateHooks';
 
 export default function create<T extends (...args: any[]) => void>(
@@ -55,11 +56,14 @@ export default function create<T extends (...args: any[]) => void>(
 
   const suite: IVestSuite = assign(
     context.bind({ stateRef }, (...args: unknown[]) => {
+      const [prevTestsOrdered, testsOrdered] = useTestsOrdered();
+
       const [previousTestObjects] = useTestObjects();
       const [, setCarryOverTests] = useCarryOverTests();
       const [pending] = usePending();
       const [prevLagging, setLagging] = useLagging();
       state.reset();
+      testsOrdered(() => prevTestsOrdered);
       setCarryOverTests(() => previousTestObjects);
 
       // Move all the active pending tests to the lagging array
