@@ -34,7 +34,7 @@ describe('Stateful behavior', () => {
   });
 });
 
-describe('more complex', () => {
+describe.skip('more complex', () => {
   const { test, create } = vest;
 
   const data: Record<string, string> = {};

@@ -32,7 +32,7 @@ export function testBase(
   });
 
   const prevRunTest = useTestAtCursor(testObject);
-  // console.log(testObject, prevRunTest, cursorAt);
+
   if (isExcluded(testObject)) {
     setSkippedTests(skippedTests => skippedTests.concat(testObject));
     testObject.skip();

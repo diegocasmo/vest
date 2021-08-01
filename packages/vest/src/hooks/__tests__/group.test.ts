@@ -67,8 +67,7 @@ describe('group: exclusion', () => {
       res = validate({ skipGroup: groupName });
     });
 
-    it('produce result object with the group', () => {
-      expect(res.groups[groupName]).toBeDefined();
+    it.only('produce result object with the group', () => {
       expect(res.groups[groupName]).toMatchInlineSnapshot(`
         Object {
           "field_1": Object {

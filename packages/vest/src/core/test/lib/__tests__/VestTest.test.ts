@@ -1,7 +1,6 @@
 import runCreateRef from '../../../../../testUtils/runCreateRef';
 
 import VestTest from 'VestTest';
-import addTestToState from 'addTestToState';
 import context from 'ctx';
 import { setPending } from 'pending';
 import { usePending, useLagging, useTestsOrdered } from 'stateHooks';
@@ -80,10 +79,6 @@ describe('VestTest', () => {
 
     beforeEach(() => {
       stateRef = runCreateRef();
-
-      context.run({ stateRef }, () => {
-        addTestToState(testObject);
-      });
     });
 
     it.withContext(
